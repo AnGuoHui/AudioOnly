@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 1. 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 2. 前台服务权限 (Android 13+ 需要特别声明) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
+    <!-- 3. 防止休眠 (可选，确保屏幕关闭时CPU不休眠) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name=".data.DbConn"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="AudioOnly"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:usesCleartextTraffic="true"><!--  android:usesCleartextTraffic="true"允许http直链请求  -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.AudioPlaybackService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+
+            <!-- 必须包含这个 intent-filter，否则 SessionToken 无法解析 -->
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService"/>
+            </intent-filter>
+
+            <!-- 可选：支持媒体浏览器兼容 -->
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService"/>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

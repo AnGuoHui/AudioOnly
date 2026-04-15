@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="24dp">
+
+    <!-- 1. 歌曲标题 -->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_title"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="音频流播放器"-->
+    <!--        android:textColor="#FFFFFF"-->
+    <!--        android:textSize="22sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:layout_marginTop="24dp"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+    <!-- 2. 艺术家名称 -->
+    <TextView
+        android:id="@+id/tv_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="等待播放..."
+        android:textColor="#AAAAAA"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 3. 进度条 (SeekBar) -->
+    <SeekBar
+        android:id="@+id/seekbar_progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:progressTint="#1DB954"
+        android:thumbTint="#1DB954"
+        app:layout_constraintTop_toBottomOf="@id/tv_artist"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 时间文本容器 (当前时间 / 总时间) -->
+    <LinearLayout
+        android:id="@+id/layout_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/seekbar_progress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <!-- 当前时间 (靠左) -->
+        <TextView
+            android:id="@+id/tv_current_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00:00"
+            android:textColor="#888888"
+            android:textSize="12sp"/>
+
+        <!-- 总时间 (靠右) -->
+        <TextView
+            android:id="@+id/tv_total_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="00:00"
+            android:textColor="#888888"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <!-- 4. 播放控制按钮区域 -->
+    <LinearLayout
+        android:id="@+id/layout_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 上一曲 -->
+        <ImageButton
+            android:id="@+id/btn_prev"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_previous"
+            app:tint="#FFFFFF"
+            android:contentDescription="上一曲"/>
+
+        <!-- 快退 (10秒) -->
+        <ImageButton
+            android:id="@+id/btn_rewind"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_rew"
+            app:tint="#FFFFFF"
+            android:contentDescription="快退"/>
+
+        <!-- 播放/暂停 (大按钮) -->
+        <ImageButton
+            android:id="@+id/btn_play_pause"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_play"
+            app:tint="#FFFFFF"
+            android:contentDescription="播放/暂停"/>
+
+        <!-- 快进 (10秒) -->
+        <ImageButton
+            android:id="@+id/btn_forward"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_ff"
+            app:tint="#FFFFFF"
+            android:contentDescription="快进"/>
+
+        <!-- 下一曲 -->
+        <ImageButton
+            android:id="@+id/btn_next"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_next"
+            app:tint="#FFFFFF"
+            android:contentDescription="下一曲"/>
+    </LinearLayout>
+
+    <!-- 5. App 内音量控制 -->
+    <LinearLayout
+        android:id="@+id/layout_volume_control"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_controls"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_lock_silent_mode_off"
+            app:tint="#AAAAAA"/>
+
+        <SeekBar
+            android:id="@+id/seekbar_volume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="16dp"
+            android:max="100"
+            android:progressTint="#1DB954"
+            android:thumbTint="#1DB954"/>
+
+        <TextView
+            android:id="@+id/tv_volume_percent"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="50%"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:gravity="end"/>
+
+
+    </LinearLayout>
+    <!-- 5. 音频流获取控制 -->
+    <LinearLayout
+        android:id="@+id/layout_play_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="1dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_volume_control"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 播放直链按钮 -->
+        <Button
+            android:id="@+id/btn_get_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="直链"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_volume_control"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- 获取单曲按钮 -->
+        <Button
+            android:id="@+id/btn_get_single"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单曲"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_volume_control"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- 获取合集按钮 -->
+        <Button
+            android:id="@+id/btn_get_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合集"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_volume_control"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- 清空列表按钮 -->
+        <Button
+            android:id="@+id/btn_get_clean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="清空"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_volume_control"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </LinearLayout>
+
+    <!-- 7. 动态播放列表 (RecyclerView) -->
+    <!-- 使用固定高度 确保不可折叠，始终占据屏幕空间 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_playlist"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="0dp"
+        android:background="#1E1E1E"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/layout_play_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
