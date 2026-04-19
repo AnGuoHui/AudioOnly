@@ -15,11 +15,12 @@
     <application
         android:name=".data.DbConn"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="AudioOnly"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-        android:usesCleartextTraffic="true"><!--  android:usesCleartextTraffic="true"允许http直链请求  -->
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".MainActivity"
